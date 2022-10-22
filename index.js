@@ -3,6 +3,7 @@ const app = express()
 const port = process.env.PORT || 5000;
 
 
+const connectionString = process.env.DATABASE_URL;
 
 const corse = require('cors');
 require('dotenv').config();
@@ -19,8 +20,8 @@ const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology:
 async function run() {
     try {
         await client.connect();
+        await client.connect(connectionString);
         const articleCollection = client.db("Article").collection("Articles");
-        const articleDeleted = client.db("delete-articale").collection("deleted");
 
         // post user information
         app.post('/article', async (req, res) => {
