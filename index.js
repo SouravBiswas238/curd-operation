@@ -3,7 +3,6 @@ const app = express()
 const port = process.env.PORT || 5000;
 
 
-const connectionString = process.env.DATABASE_URL;
 
 const corse = require('cors');
 require('dotenv').config();
@@ -21,7 +20,6 @@ async function run() {
     try {
         await client.connect();
         // mongo db connecting string
-        await client.connect(connectionString);
         const articleCollection = client.db("Article").collection("Articles");
 
         // post user information
